@@ -111,11 +111,12 @@ az functionapp create \
 	--functions-version 4 \
 	--os-type linux \
 	--assign-identity "[system]" \
-	--storage-account ${STORAGE_ACCOUNT} \
-	--deployment-source-branch main \
-	--deployment-source-url https://github.com/lekkimworld/salesforce-datacloud-vectordb-azure-functionapp-notifier.git \
-	 --build-remote true 
-# az functionapp deployment source config-zip --resource-group $RESOURCE_GROUP --name $FUNCTION_APP_NAME --src $FUNCTIONAPP_ZIPFILE --build-remote true 
+	--storage-account ${STORAGE_ACCOUNT} 
+az functionapp deployment source config-zip \
+	--resource-group $RESOURCE_GROUP \
+	--name $FUNCTION_APP_NAME \
+	--src ./function_app.zip \
+	--build-remote true
 az functionapp config appsettings set \
 	--name $FUNCTION_APP_NAME \
 	--resource-group $RESOURCE_GROUP \
